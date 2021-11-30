@@ -25,8 +25,8 @@ export default function Results(props) {
     const query = getQuery(props.answers.answerOne, props.answers.answerTwo);
 
     //API cors proxy that works (for our project scale):
-    const url =
-      "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/textsearch/json?";
+    const url = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
+      // "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/textsearch/json?";
     const params = {
       query: query,
       minprice: range[0],
