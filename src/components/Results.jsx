@@ -47,7 +47,7 @@ export default function Results(props) {
     
     // initial call to the google places text search API - fetches up to 20 records in one go
     axios
-      .post(url )
+      .get(url )
       .then(function (response) {
         // this helper function returns an array of up to 20 objs (based on what was returned in the API call) containing the place_id key needed for our second API call
         console.log("post request to backend to do Google api call:", response);
