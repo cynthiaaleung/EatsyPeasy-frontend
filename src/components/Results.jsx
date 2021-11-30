@@ -25,19 +25,31 @@ export default function Results(props) {
     const query = getQuery(props.answers.answerOne, props.answers.answerTwo);
 
     //API cors proxy that works (for our project scale):
-    const url = "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/textsearch/json?";
+    //const url = "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/textsearch/json?";
+    const url = "https://infinite-ridge-26379.herokuapp.com/polls/resultspage"
     const params = {
       query: query,
       minprice: range[0],
-      maxprice: range[1],
-      key: process.env.REACT_APP_GOOGLE_PLACES_API_KEY,
+      maxprice: range[1]
     };
+
+    // axios.post('/user', {
+    //   firstName: 'Fred',
+    //   lastName: 'Flintstone'
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
     
     // initial call to the google places text search API - fetches up to 20 records in one go
     axios
-      .get(url, { params })
+      .post(url,  params )
       .then(function (response) {
         // this helper function returns an array of up to 20 objs (based on what was returned in the API call) containing the place_id key needed for our second API call
+        console.log("post request to backend to do Google api call:", response);
         const createdRestObjs = createRestaurantObjs(response);
         return createdRestObjs;
       })
