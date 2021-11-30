@@ -65,7 +65,7 @@ export default function Results(props) {
     if (poll) {
     axios({
       method: 'post',
-      url: 'http://localhost:3000/polls/create',
+      url: 'https://infinite-ridge-26379.herokuapp.com/polls/create',
       data: poll
     })
     .then(()=>{

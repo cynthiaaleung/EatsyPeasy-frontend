@@ -19,7 +19,7 @@ export default function LinkPage(props) {
     <div className="linkpage-text">
       <h1>Unique link to share with your friends:</h1>
       <div id="link-text">
-        localhost:3001/poll/{location.state.poll.alpha_numeric_id}
+      https://infinite-ridge-26379.herokuapp.com/poll/{location.state.poll.alpha_numeric_id}
       <IconButton aria-label="Copy to clipboard" className="btn" data-clipboard-target="#link-text">
         <ContentCopyIcon alt="Copy to clipboard"></ContentCopyIcon>
       </IconButton>

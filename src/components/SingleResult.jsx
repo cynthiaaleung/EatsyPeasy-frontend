@@ -49,7 +49,7 @@ export default function SingleResult(props) {
     if (pollVote && userName) {
       axios({
         method: 'post',
-        url: 'http://localhost:3000/polls/update',
+        url: 'https://infinite-ridge-26379.herokuapp.com/polls/update',
         data: {
           place_id: selectedRestaurant.place_id,
           vote: `restaurant_${defaultValue+1}_votes`,

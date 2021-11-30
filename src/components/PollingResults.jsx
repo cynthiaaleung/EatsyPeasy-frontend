@@ -18,7 +18,7 @@ export default function PollingResults(props) {
   // function used to make API calls in order to dynamically update our components
   const pollApiCall = () => axios({
     method: 'get', //need to update this to GET the 3 rest objs to populate this page
-    url: `http://localhost:3000/polls/show/${alpha_numeric_id}/results`, //make sure to point this to backend
+    url: `https://infinite-ridge-26379.herokuapp.com/polls/show/${alpha_numeric_id}/results`, //make sure to point this to backend
   })
   .then(function (response) {
     setPollData(response.data.poll);

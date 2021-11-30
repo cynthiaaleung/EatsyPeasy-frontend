@@ -17,7 +17,7 @@ export default function PollingPage(props) {
   useEffect(() => {
     axios({
       method: 'get', //need to update this to GET the 3 rest objs to populate this page
-      url: `http://localhost:3000/polls/show/${alpha_numeric_id}`, //make sure to point this to backend
+      url: `https://infinite-ridge-26379.herokuapp.com/polls/show/${alpha_numeric_id}`, //make sure to point this to backend
     })
     .then(function (response) {
       //add a function to oragnize the incoming poll data array

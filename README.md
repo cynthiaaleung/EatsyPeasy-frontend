@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# EatsyPeasy
+A single page application to help you and your friends choose where to eat! Answer 3 simple questions to generate a customized selection of restaurants, and have the option to send a poll to your friends as well!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Dependencies & Tech Stack
+* Ruby 2.6.6
+* Rails 4.2.11 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
+* PostgreSQL 14.1
+* React 17.0.2
+* React DOM 17.0.2
+* React Router
+* Google Places API
+* [thingproxy](https://github.com/Freeboard/thingproxy)
+* Axios
+* Chart.js
+* Clipboard.js
+* Material UI
 
-## Available Scripts
 
-In the project directory, you can run:
+## Getting Started
+### On front-end:
+```
+npm start
+```
+Go to localhost:3001 to view the app.
 
-### `npm start`
+### On back-end:
+```
+rails s
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Full Application Development (self-hosted)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Default port settings:
+⋅⋅* Front-end: `http://localhost:3001`
+⋅⋅* Back-end: `http://localhost:3000`
 
-### `npm test`
+### Pre-Installation
+Before working on EatsyPeasy locally, you must get an [API key from Google Places API.](https://developers.google.com/maps/documentation/places/web-service/get-api-key)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation Part 1: Frontend
 
-### `npm run build`
+1. Clone the repository to your local device, change directory into root and then "frontend", then install dependencies.
+```
+git clone git@github.com:faezcat/EatsyPeasy.git
+cd EatsyPeasy
+cd frontend
+npm i
+```
+2. In the frontend directory, create a .env file by copying the .env.example file in the frontend directory of the project. Add the API key from Google Places API.
+```
+cp .env.example .env
+```
+Opening up the .env file, replace "your-key-here" with the Google Places API key.
+```
+REACT_APP_GOOGLE_PLACES_API_KEY=your-key-here
+```
+3. Optional: By default, the frontend is set to `http://localhost:3001`. To change the port, in `package.json`, change the port number where it says `3001`:
+```
+  "scripts": {
+    "start": "PORT=3001 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+```
+### Installation Part 2: Backend
+1. Change directory to the "backend" and install dependencies:
+```
+cd /EatsyPeasy
+cd backend
+bundle install
+```
+2. Get the database set-up, starting by logging into `psql`, creating the database and then verifying that it was created:
+```
+psql
+create database eatsypeasy;
+\c eatsypeasy
+\dt
+```
+For the back-end, migrate the tables and schema:
+```
+bin/rake db:reset
+bin/rake db:migrate
+```
+To verify that the schema has been migrated to the database, run an SQL command. Note that the table will be empty, but you should see the column names:
+```
+psql eatsypeasy
+select * from users;
+```
+2. Optional: If you changed the front-end port in "Installation Part 1: Frontend" - Step 3, this step will apply. To avoid CORS issues, the back-end is using 'rack-cors' middleware for connection to frontend `http://localhost:3001`. To change the frontend port configuration, in config > initializers > `cors.rb`, change the port number where it says `3001`:
+```
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins 'localhost:3001'
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+end
+```
+3. Optional: By default, the backend is set to `http://localhost:3000`. If using a different back-end port, the API get/post requests in the front-end will need to be updated. This can be done by searching `http://localhost:3000` and replacing the port with your new back-end port number.
