@@ -34,7 +34,7 @@ function updateRestaurantObj(restaurant, placeDetails) {
 }
 
 export async function addDetailsToRestaurantObjs(createdRestObjs) {
-  const url = "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?";
+  const url = "https://maps.googleapis.com/maps/api/place/details/json?";
   const apiKey = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
   const updatedObjs = [];
   const promises = [];
