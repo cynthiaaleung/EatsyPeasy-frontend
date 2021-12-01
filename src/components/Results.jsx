@@ -54,8 +54,8 @@ export default function Results(props) {
       } )
       .then(function (response) {
         // this helper function returns an array of up to 20 objs (based on what was returned in the API call) containing the place_id key needed for our second API call
-        console.log("post request to backend to do Google api call:", response.data.results);
-        const createdRestObjs = createRestaurantObjs(response.data.results);
+        console.log("post request to backend to do Google api call:", response);
+        const createdRestObjs = createRestaurantObjs(response);
         return createdRestObjs;
       })
       .then((createdRestObjs) => {
