@@ -19,17 +19,16 @@ export default function LinkPage(props) {
     <div className="linkpage-text">
       <h1>Unique link to share with your friends:</h1>
       <div id="link-text">
-      https://infinite-ridge-26379.herokuapp.com/poll/{location.state.poll.alpha_numeric_id}
+      https://eatsypeasy.netlify.app/poll/{location.state.poll.alpha_numeric_id}
       <IconButton aria-label="Copy to clipboard" className="btn" data-clipboard-target="#link-text">
         <ContentCopyIcon alt="Copy to clipboard"></ContentCopyIcon>
       </IconButton>
       </div>
-
-<Button 
-style={{backgroundColor: "#0198E1", fontFamily: 'Quicksand, sans-serif'}} variant="contained" 
-onClick={() => {navigate(`../poll/${location.state.poll.alpha_numeric_id}`);}}>Vote
-</Button>
-</div>
-</Fragment>
+    <Button 
+    style={{backgroundColor: "#0198E1", fontFamily: 'Quicksand, sans-serif'}} variant="contained" 
+    onClick={() => {navigate(`../poll/${location.state.poll.alpha_numeric_id}`);}}>Vote
+    </Button>
+    </div>
+    </Fragment>
   )
 }

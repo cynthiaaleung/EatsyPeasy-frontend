@@ -7,7 +7,7 @@ export function createRestaurantObjs(results) {
   const arrayOfRestaurantObjs = [];
 
   for (let restaurant of arrayOfResults) {
-    if (restaurant.business_status === "OPERATIONAL") {
+    if (restaurant.business_status === "OPERATIONAL" && restaurant.rating >= 4) {
       arrayOfRestaurantObjs.push({
         place_id: restaurant.place_id,
       });
@@ -34,23 +34,18 @@ function updateRestaurantObj(restaurant, placeDetails) {
 }
 
 export async function addDetailsToRestaurantObjs(createdRestObjs) {
-  //const url = "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?";
   const url = "https://infinite-ridge-26379.herokuapp.com/polls/resultsdetails"
-  //const apiKey = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
   const updatedObjs = [];
+  const correctedObjs = [];
   const promises = [];
 
   for (const restaurant of createdRestObjs) {
     // we are using the place_id contained in each restaurant obj to make an individual API call per obj
     const restaurantId = restaurant.place_id;
-    // const params = {
-    //   place_id: restaurantId,
-    //   key: apiKey,
-    // };
+
     // each promise contains an individual API call (as the initial one did not give us all the information we required) followed by data formatting into useable objects for our display and save purposes
     promises.push(
       axios.post(url, { place_id: restaurantId }).then((response) => {
-        console.log("line53 response", response);
         const placeDetails = response.data.result;
         // this helper function actually does the formatting of each restaurant obj to contain the new information pulled from each API call
         updatedObjs.push(updateRestaurantObj(restaurant, placeDetails));
@@ -60,7 +55,15 @@ export async function addDetailsToRestaurantObjs(createdRestObjs) {
   // here we are awaiting the resolution of all promises prior to returning an array containing all properly formatted restaurant objects
   return await Promise.all(promises)
     .then(() => {
-      return updatedObjs;
+      for (const restaurant of createdRestObjs) {
+        for (let i = 0; i < updatedObjs.length; i++) {
+          if (restaurant.place_id === updatedObjs[i].place_id) {
+            correctedObjs.push(updatedObjs[i]);
+          }
+        }
+      }
+
+      return correctedObjs;
     })
     .catch((err) => {
       console.log(err);
