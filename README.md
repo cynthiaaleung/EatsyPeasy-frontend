@@ -9,7 +9,6 @@ A single page application to help you and your friends choose where to eat! Answ
 * React DOM 17.0.2
 * React Router
 * Google Places API
-* [thingproxy](https://github.com/Freeboard/thingproxy) - for quick, initial Google API testing
 * Axios
 * Chart.js
 * Clipboard.js
