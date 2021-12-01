@@ -28,11 +28,11 @@ export default function Results(props) {
     //const url = "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/textsearch/json?";
     const url = "https://infinite-ridge-26379.herokuapp.com/polls/resultspage"
     //const url = "https://infinite-ridge-26379.herokuapp.com/google";
-    const params = {
-      query: query,
-      minprice: range[0],
-      maxprice: range[1]
-    };
+    // const params = {
+    //   query: query,
+    //   minprice: range[0],
+    //   maxprice: range[1]
+    // };
 
     // axios.post('/user', {
     //   firstName: 'Fred',
@@ -47,11 +47,15 @@ export default function Results(props) {
     
     // initial call to the google places text search API - fetches up to 20 records in one go
     axios
-      .post(url, params )
+      .post(url, {
+        query: query,
+        minprice: range[0],
+        maxprice: range[1]
+      } )
       .then(function (response) {
         // this helper function returns an array of up to 20 objs (based on what was returned in the API call) containing the place_id key needed for our second API call
-        console.log("post request to backend to do Google api call:", response);
-        const createdRestObjs = createRestaurantObjs(response);
+        console.log("post request to backend to do Google api call:", response.data.results);
+        const createdRestObjs = createRestaurantObjs(response.data.results);
         return createdRestObjs;
       })
       .then((createdRestObjs) => {

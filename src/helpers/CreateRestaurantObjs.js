@@ -34,21 +34,23 @@ function updateRestaurantObj(restaurant, placeDetails) {
 }
 
 export async function addDetailsToRestaurantObjs(createdRestObjs) {
-  const url = "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?";
-  const apiKey = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
+  //const url = "https://thingproxy.freeboard.io/fetch/https://maps.googleapis.com/maps/api/place/details/json?";
+  const url = "https://infinite-ridge-26379.herokuapp.com/polls/resultsdetails"
+  //const apiKey = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
   const updatedObjs = [];
   const promises = [];
 
   for (const restaurant of createdRestObjs) {
     // we are using the place_id contained in each restaurant obj to make an individual API call per obj
     const restaurantId = restaurant.place_id;
-    const params = {
-      place_id: restaurantId,
-      key: apiKey,
-    };
+    // const params = {
+    //   place_id: restaurantId,
+    //   key: apiKey,
+    // };
     // each promise contains an individual API call (as the initial one did not give us all the information we required) followed by data formatting into useable objects for our display and save purposes
     promises.push(
-      axios.get(url, { params }).then((response) => {
+      axios.post(url, { place_id: restaurantId }).then((response) => {
+        console.log("line53 response", response);
         const placeDetails = response.data.result;
         // this helper function actually does the formatting of each restaurant obj to contain the new information pulled from each API call
         updatedObjs.push(updateRestaurantObj(restaurant, placeDetails));
