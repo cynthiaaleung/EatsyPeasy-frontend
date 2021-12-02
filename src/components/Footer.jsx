@@ -8,8 +8,7 @@ export default function Footer() {
       <div>Contact Us: </div>
       <p>Faez: </p>
       <a href="https://github.com/FaezCat"><FontAwesomeIcon icon={faGithub} /></a> 
-      {/* change to actual linkedin */}
-      <a href="https://github.com/FaezCat"><FontAwesomeIcon icon={faLinkedin} /></a>
+      <a href="https://www.linkedin.com/in/faez-catrina-51024599/"><FontAwesomeIcon icon={faLinkedin} /></a>
       <p>|</p>
       <p>Cynthia: </p>
       <a href="https://github.com/cynthiaaleung"><FontAwesomeIcon icon={faGithub} /></a>
