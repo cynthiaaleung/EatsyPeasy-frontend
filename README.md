@@ -13,6 +13,8 @@ A single page application to help you and your friends choose where to eat! Answ
 * Chart.js
 * Clipboard.js
 * Material UI
+* HTML
+* SASS
 
 ## Full Application Development (self-hosted)
 
