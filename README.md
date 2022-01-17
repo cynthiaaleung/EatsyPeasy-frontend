@@ -4,6 +4,8 @@ A single page application to help you and your friends choose where to eat! Answ
 Note: The backend is deployed on Heroku and here is the link to the repo: https://github.com/cynthiaaleung/EatsyPeasy-backend
 
 ## Dependencies & Tech Stack
+
+* JavaScript
 * Ruby 2.6.6
 * Rails 4.2.11 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
 * PostgreSQL 14.1
