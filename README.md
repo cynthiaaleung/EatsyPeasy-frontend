@@ -3,6 +3,30 @@ A single page application to help you and your friends choose where to eat! Answ
 
 Note: The backend is deployed on Heroku and here is the link to the repo: https://github.com/cynthiaaleung/EatsyPeasy-backend
 
+<h5 align="center">
+EatsyPeasy landing page and 3 questions to display customized restaurant results:
+</h5>
+
+<div align="center">
+<img src="https://media.giphy.com/media/e3NJKSovarIin9AxgG/giphy.gif">
+</div>
+
+<h5 align="center">
+Get customized results, generate a poll, and share a unique link with friends:
+</h5>
+
+<div align="center">
+<img src="https://media.giphy.com/media/yh7wWGrqEgTvuMLerL/giphy.gif">
+</div>
+
+<h5 align="center">
+Vote for your favorite restaurant using the unique link and view the leading option's information:
+</h5>
+
+<div align="center">
+<img src="https://media.giphy.com/media/6RcfzC5Y9I7sGAd1Tk/giphy.gif">
+</div>
+
 ## Dependencies & Tech Stack
 
 * JavaScript
@@ -105,27 +129,3 @@ Go to localhost:3001 to view the app.
 ```
 rails s
 ```
-
-<h5 align="center">
-EatsyPeasy landing page and 3 questions to display customized restaurant results:
-</h5>
-
-<div align="center">
-<img src="https://media.giphy.com/media/e3NJKSovarIin9AxgG/giphy.gif">
-</div>
-
-<h5 align="center">
-Get customized results, generate a poll, and share a unique link with friends:
-</h5>
-
-<div align="center">
-<img src="https://media.giphy.com/media/yh7wWGrqEgTvuMLerL/giphy.gif">
-</div>
-
-<h5 align="center">
-Vote for your favorite restaurant using the unique link and view the leading option's information:
-</h5>
-
-<div align="center">
-<img src="https://media.giphy.com/media/6RcfzC5Y9I7sGAd1Tk/giphy.gif">
-</div>
