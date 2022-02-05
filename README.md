@@ -55,7 +55,7 @@ Before working on EatsyPeasy locally, you must get an [API key from Google Place
 
 ### Installation Part 1: Frontend
 
-1. Clone the repository to your local device, change directory into root and then "frontend", then install dependencies.
+1. Clone the repository: https://github.com/FaezCat/EatsyPeasy to your local device, change directory into root and then "frontend", then install dependencies.
 ```
 git clone git@github.com:faezcat/EatsyPeasy.git
 cd EatsyPeasy
