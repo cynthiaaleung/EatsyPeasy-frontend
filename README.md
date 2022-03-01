@@ -40,7 +40,7 @@ Vote for your favorite restaurant using the unique link and view the leading opt
 * Axios
 * Chart.js
 * Clipboard.js
-* Material UI
+* Material-UI
 * HTML
 * SASS
 
