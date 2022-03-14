@@ -9,7 +9,7 @@ import Results from "./components/Results";
 import LinkPage from "./components/LinkPage";
 import PollingPage from "./components/PollingPage";
 import PollingResults from "./components/PollingResults";
-import "./App.css";
+import "./App.scss";
 
 function App() {
 
@@ -46,9 +46,18 @@ function App() {
             path="/results"
             element={<Results answers={answers}/>}
           />
-          <Route path="/linkpage" element={<LinkPage />} />
-          <Route path="/poll/:alpha_numeric_id/results" element={<PollingResults />} />
-          <Route path="/poll/:alpha_numeric_id" element={<PollingPage />} />
+          <Route 
+            path="/linkpage" 
+            element={<LinkPage />} 
+          />
+          <Route 
+            path="/poll/:alpha_numeric_id/results" 
+            element={<PollingResults />} 
+          />
+          <Route 
+            path="/poll/:alpha_numeric_id" 
+            element={<PollingPage />} 
+          />
         </Routes>
         <Footer />
       </div>
