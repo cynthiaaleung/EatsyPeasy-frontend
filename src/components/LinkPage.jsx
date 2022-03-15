@@ -1,10 +1,10 @@
 import { Fragment } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import Clipboard from 'clipboard/dist/clipboard.min'
+import Clipboard from 'clipboard/dist/clipboard.min';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import IconButton from '@mui/material/IconButton';
-import "../styles/LinkPage.scss"
+import "../styles/LinkPage.scss";
 
 export default function LinkPage(props) {
   
@@ -16,19 +16,21 @@ export default function LinkPage(props) {
 
   return (
     <Fragment>
-    <div className="linkpage-text">
-      <h1>Unique link to share with your friends:</h1>
-      <div id="link-text">
-      https://eatsypeasy.netlify.app/poll/{location.state.poll.alpha_numeric_id}
-      <IconButton aria-label="Copy to clipboard" className="btn" data-clipboard-target="#link-text">
-        <ContentCopyIcon alt="Copy to clipboard"></ContentCopyIcon>
-      </IconButton>
+      <div className="linkpage-text">
+        <h1>Unique link to share with your friends:</h1>
+        <div id="link-text">
+          https://eatsypeasy.netlify.app/poll/{location.state.poll.alpha_numeric_id}
+        <IconButton aria-label="Copy to clipboard" className="btn" data-clipboard-target="#link-text">
+          <ContentCopyIcon alt="Copy to clipboard"></ContentCopyIcon>
+        </IconButton>
+        </div>
+        <Button 
+          style={{backgroundColor: "#0198E1", fontFamily: 'Quicksand, sans-serif'}} 
+          variant="contained"
+          // navigates to PollingPage
+          onClick={() => {navigate(`../poll/${location.state.poll.alpha_numeric_id}`);}}>Vote
+        </Button>
       </div>
-    <Button 
-    style={{backgroundColor: "#0198E1", fontFamily: 'Quicksand, sans-serif'}} variant="contained" 
-    onClick={() => {navigate(`../poll/${location.state.poll.alpha_numeric_id}`);}}>Vote
-    </Button>
-    </div>
     </Fragment>
   )
 }
