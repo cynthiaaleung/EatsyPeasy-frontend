@@ -32,8 +32,8 @@ export default function Results(props) {
         query: query,
         minprice: range[0],
         maxprice: range[1]
-      } )
-      .then(function (response) {
+      })
+      .then((response) => {
         // this helper function returns an array of up to 20 objs (based on what was returned in the API call) containing the place_id key needed for our second API call
         const createdRestObjs = createRestaurantObjs(response);
         return createdRestObjs;
@@ -43,13 +43,13 @@ export default function Results(props) {
         const updatedObjs = addDetailsToRestaurantObjs(createdRestObjs);
         return updatedObjs;
       })
-      .then(function (updatedObjs) {
+      .then((updatedObjs) => {
         // here we are setting the itemData state to house the array of properly formatted restaurant objs (now containing all information) 
         setItemData(updatedObjs);
         // here we are setting the initial selectedRestaurants state to contain the first 3 restaurant objs (for display purposes in the singleresult components below)
         setSelectedRestaurants([updatedObjs[0], updatedObjs[1], updatedObjs[2]]);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }, []);
@@ -64,14 +64,14 @@ export default function Results(props) {
       url: 'https://infinite-ridge-26379.herokuapp.com/polls/create',
       data: poll
     })
-    .then(()=>{
+    .then(() => {
       // upon creating the poll record, you are then redirected to the linkpage
       navigate('/linkpage', { state: {poll: poll} });
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
     });
-  }
+    }
   }, [poll])
 
   // this numericId is what becomes the alpha_numeric_id shown on each poll (and what you use to access each poll as well)
@@ -105,7 +105,7 @@ export default function Results(props) {
     return poll;
   }
 
-  // visual components + conditional rendering for all 3 singleresult display components + the loading bar aka LinearIndeterminate component
+  // visual components + conditional rendering for all 3 SingleResult display components + the loading bar aka LinearIndeterminate component
   return (
     <Fragment>
       <div className="page-number-display">
@@ -115,21 +115,50 @@ export default function Results(props) {
         {selectedRestaurants.length > 0 && <h1>Your Customized Selections</h1>}
       </div>
       <div className="single-result-stacks">
-        {(itemData[0] && selectedRestaurants.length > 0) && <SingleResult itemData={itemData} defaultValue={0} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} parentComponent="Results"/>}
-        {(itemData[1] && selectedRestaurants.length > 0) &&  <SingleResult itemData={itemData} defaultValue={1} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} parentComponent="Results"/>}
-        {(itemData[2] && selectedRestaurants.length > 0) && <SingleResult itemData={itemData} defaultValue={2} selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants} parentComponent="Results"/>}
+        {(itemData[0] && selectedRestaurants.length > 0) && 
+          <SingleResult 
+            itemData={itemData} 
+            defaultValue={0} 
+            selectedRestaurants={selectedRestaurants} 
+            setSelectedRestaurants={setSelectedRestaurants} 
+            parentComponent="Results"
+          />
+        }
+        {(itemData[1] && selectedRestaurants.length > 0) &&  
+          <SingleResult 
+            itemData={itemData} 
+            defaultValue={1} 
+            selectedRestaurants={selectedRestaurants} 
+            setSelectedRestaurants={setSelectedRestaurants} 
+            parentComponent="Results"
+          />
+        }
+        {(itemData[2] && selectedRestaurants.length > 0) && 
+          <SingleResult 
+            itemData={itemData} 
+            defaultValue={2} 
+            selectedRestaurants={selectedRestaurants} 
+            setSelectedRestaurants={setSelectedRestaurants} 
+            parentComponent="Results"
+          />
+        }
         {selectedRestaurants.length === 0 && <LinearIndeterminate />}
       </div>
-
-       {selectedRestaurants.length > 0 && <Box textAlign='center' padding={5}>
-        <h3 id="generate-poll-text">Need some input? Generate a poll to share with your friends!</h3>
-        <Button 
-            style={{backgroundColor: "#0198E1", fontFamily: 'Quicksand, sans-serif'}} variant="contained" 
-            onClick={() => {const pollObj = createPoll(selectedRestaurants); setPoll(pollObj); 
-            //trigger to do POST request
-            }}>Generate Poll
-        </Button>
-      </Box>}
+      {selectedRestaurants.length > 0 && 
+        <Box textAlign='center' padding={5}>
+          <h3 id="generate-poll-text">
+            Need some input? Generate a poll to share with your friends!
+          </h3>
+          <Button 
+              style={{backgroundColor: "#0198E1", fontFamily: 'Quicksand, sans-serif'}} variant="contained" 
+              onClick={() => {
+                //create Poll obj for POST request to create poll entry in database
+                const pollObj = createPoll(selectedRestaurants); 
+                setPoll(pollObj); 
+              }}>Generate Poll
+          </Button>
+        </Box>
+      }
     </Fragment>
  )
 }
