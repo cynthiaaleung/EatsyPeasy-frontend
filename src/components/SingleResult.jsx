@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPhotoUrl } from "../helpers/GetRestaurantPhotoUrl";
-import {getPriceIcon} from "../helpers/getPriceIcon";
+import { getPriceIcon } from "../helpers/getPriceIcon";
 import { styled } from '@mui/material/styles';
 import axios from "axios";
 import Paper from '@mui/material/Paper';
@@ -67,38 +67,46 @@ export default function SingleResult(props) {
     }
   }, [pollVote])
 
-
   return (
     <div className="column">
       <Stack
         direction="column"
-        spacing={{ xs: 1, sm: 2, md: 2 }}>
+        spacing={{ xs: 1, sm: 2, md: 2 }}
+      >
         <Item>
           {(parentComponent === "PollingPage") && 
           <Item>
             <h3>{selectedRestaurant.restaurant_name}</h3>
           </Item>}
           {(parentComponent === "Results") && 
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel>Choice {defaultValue + 1}</InputLabel>
-              <Select
-                id="restaurant-simple-select"
-                label="Restaurant"
-                value={selectedIndex}
-                onChange={handleChange}
-                style={{fontFamily: 'Quicksand, sans-serif'}}>
-              {itemData.map((item, index) => {
-                return <MenuItem key={index} value={index}>{item.restaurant_name}</MenuItem>
-              })}
-              </Select>
-            </FormControl>
-          </Box>}
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel>Choice {defaultValue + 1}</InputLabel>
+                <Select
+                  id="restaurant-simple-select"
+                  label="Restaurant"
+                  value={selectedIndex}
+                  onChange={handleChange}
+                  style={{fontFamily: 'Quicksand, sans-serif'}}>
+                {itemData.map((item, index) => {
+                  return <MenuItem key={index} value={index}>{item.restaurant_name}</MenuItem>
+                })}
+                </Select>
+              </FormControl>
+            </Box>
+          }
           <img src={imageUrl} alt={"restaurant"} className="restaurant-image"/>
         </Item>
         <Item>        
           <h4> Rating: {selectedRestaurant.ave_rating} - 
-          <Rating className="rating" name="read-only" defaultValue={selectedRestaurant.ave_rating} precision={0.25} readOnly /> - {selectedRestaurant.user_ratings_total} Reviews - {getPriceIcon(selectedRestaurant.price_level)}
+          <Rating 
+            className="rating" 
+            name="read-only" 
+            defaultValue={selectedRestaurant.ave_rating} 
+            precision={0.25} 
+            readOnly 
+          /> 
+          - {selectedRestaurant.user_ratings_total} Reviews - {getPriceIcon(selectedRestaurant.price_level)}
           </h4>
         </Item>
         <Item>
@@ -115,13 +123,28 @@ export default function SingleResult(props) {
           <h3>Contact Information:</h3>
           <h4>{selectedRestaurant.phone_number || "No phone number available"}</h4>
           <h4>
-            <a href={selectedRestaurant.website} target="_blank" rel="noreferrer">{selectedRestaurant.website || "No website available"}
+            <a 
+              href={selectedRestaurant.website} 
+              target="_blank" 
+              rel="noreferrer"
+            >
+              {selectedRestaurant.website || "No website available"}
             </a>
           </h4>
           <h3>Directions:</h3>
           <h4>
-            <a href={selectedRestaurant.maps_directions} target="_blank" rel="noreferrer">
-              <img className="maps_icon" src="https://www.google.com/images/branding/product/2x/maps_96in128dp.png" alt="map-icon" width="50" height="50"/>
+            <a 
+              href={selectedRestaurant.maps_directions} 
+              target="_blank" 
+              rel="noreferrer"
+            >
+              <img 
+                className="maps_icon" 
+                src="https://www.google.com/images/branding/product/2x/maps_96in128dp.png" 
+                alt="map-icon" 
+                width="50" 
+                height="50"
+              />
             </a> 
             {selectedRestaurant.formatted_address}
           </h4>
@@ -130,9 +153,11 @@ export default function SingleResult(props) {
           <Button 
             style={{backgroundColor: "#0198E1", fontFamily: 'Quicksand, sans-serif'}} 
             variant="contained" 
-            onClick={() => {setPollVote(selectedRestaurant.place_id);}}>
-          I Choose you!
-          </Button>}
+            onClick={() => {setPollVote(selectedRestaurant.place_id);}}
+          >
+            I Choose you!
+          </Button>
+        }
       </Stack>
     </div>
   )
