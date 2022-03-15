@@ -8,7 +8,6 @@ import useInterval from '../hooks/useInterval';
 import BusinessHours from './SingleResult_Comps/BusinessHours';
 import "../styles/PollingResults.scss";
 
-
 export default function PollingResults(props) {
   const [pollData, setPollData] = useState(false);
   const [usersData, setUsersData] = useState(false);
@@ -20,16 +19,16 @@ export default function PollingResults(props) {
     method: 'get', //need to update this to GET the 3 rest objs to populate this page
     url: `https://infinite-ridge-26379.herokuapp.com/polls/show/${alpha_numeric_id}/results`, //make sure to point this to backend
   })
-  .then(function (response) {
+  .then((response) => {
     setPollData(response.data.poll);
     setUsersData(response.data.users);
     return response.data.poll;
   })
-  .then ((pollData)=> {
+  .then((pollData) => {
     const topRestaurant = getWinningRestaurant(pollData);
     setWinningRestaurant(topRestaurant);
   })
-  .catch(function (error) {
+  .catch((error) => {
     console.log(error);
   });
   
@@ -106,29 +105,57 @@ export default function PollingResults(props) {
 
 return(
   <Fragment>
-    {winningRestaurant && <div className="poll-results">
-      <Bar data={data} options={options} height={400}></Bar>
-    </div>}
-    <br />
-    
-    {winningRestaurant && <div className="winning-result-info">
-      <h2>{winningRestaurant.restaurant_name}</h2>
-      <div className="leading-choice-information">
-        <div id="business-hours">
-    <     h3>Business Hours:</h3>
-          <BusinessHours business_hours={winningRestaurant.business_hours}></BusinessHours>
-        </div>
-        <div id="contact-information">
-          <h3>Contact Information:</h3>
-          <h4>{winningRestaurant.phone_number || "No number available"}</h4>
-          < h4><a href={winningRestaurant.website} target="_blank" rel="noreferrer">{winningRestaurant.website || "No website available"}</a></h4>
-        </div>
-        <div id="directions">
-          <h3>Directions:</h3>
-          <h4><a href={winningRestaurant.maps_directions} target="_blank" rel="noreferrer"><img className="maps_icon" src="https://www.google.com/images/branding/product/2x/maps_96in128dp.png" alt="map-icon" width="50" height="50"/></a></h4>
-        </div>
+    {winningRestaurant && 
+      <div className="poll-results">
+        <Bar 
+          data={data} 
+          options={options} 
+          height={400}
+        >
+        </Bar>
       </div>
-    </div>}
+    }
+    <br />
+    {winningRestaurant && 
+      <div className="winning-result-info">
+        <h2>{winningRestaurant.restaurant_name}</h2>
+        <div className="leading-choice-information">
+          <div id="business-hours">
+          <h3>Business Hours:</h3>
+            <BusinessHours business_hours={winningRestaurant.business_hours}></BusinessHours>
+          </div>
+          <div id="contact-information">
+            <h3>Contact Information:</h3>
+            <h4>{winningRestaurant.phone_number || "No number available"}</h4>
+            <h4>
+              <a 
+                href={winningRestaurant.website} 
+                target="_blank" 
+                rel="noreferrer"
+              >
+                {winningRestaurant.website || "No website available"}
+              </a>
+            </h4>
+          </div>
+          <div id="directions">
+            <h3>Directions:</h3>
+            <h4>
+              <a href={winningRestaurant.maps_directions} 
+                target="_blank" 
+                rel="noreferrer"
+              >
+                <img 
+                  className="maps_icon" 
+                  src="https://www.google.com/images/branding/product/2x/maps_96in128dp.png" 
+                  alt="map-icon" 
+                  width="50" 
+                  height="50"
+                />
+              </a>
+            </h4>
+          </div>
+        </div>
+      </div>}
   </Fragment>
 );  
 }
